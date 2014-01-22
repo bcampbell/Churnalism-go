@@ -24,9 +24,9 @@
           <div class="col-xs-12">
               <form class="area area-searchform" id="searchForm"  role="form">
                   <fieldset>
-                      <legend>Enter the URL of an article you'd like to check...</legend>
                       <div class="form-group">
-                          <input id="url" class="form-control" type="url" placeholder="eg: http://madeupnewspaper.com/latest/scientists-discover-moon-made-of-cheese.html" title="Must be a valid URL."></input>
+                          <label for="url">Enter the URL of an article you'd like to check...</label>
+                          <input id="url" class="form-control" type="url" placeholder="http://" title="Must be a valid URL."></input>
                       </div>
                       <!--
                       <div class="form-group">
@@ -35,9 +35,9 @@
                       -->
                   </fieldset>
                   <fieldset>
-                      <legend>... or paste some of its text in here:</legend>
                       <div class="form-group">
-                          <textarea id="text" class="form-control" placeholder="paste article text here" title="Must be at least 30 characters long." rows=10></textarea>
+                      <label for="text">... or paste some of its text in here:</label>
+                          <textarea id="text" class="form-control" placeholder="text goes here" title="Must be at least 30 characters long." rows=10></textarea>
                       </div>
                       <div class="form-group">
                           <button id="search" type="submit" class="btn btn-lg btn-primary pull-right">Check for churn</button>
