@@ -1,32 +1,66 @@
-  <div class="row">
-    <div id="left" class="col-md-9"></div>
-    <div id="right" class="col-md-3"></div>
-  </div>
-  <div class="row">
-    <div id="bottom" class="col-md-12"></div>
-  </div>
-  <script id="searchTemplate" type="text/html">
-    <form class="area" id="searchForm"  role="form">
-      <fieldset>
-        <div class="form-group">
-          <input id="url" class="form-control" type="url" placeholder="Enter a url of a web page containing an article here." title="Must be a valid URL."></input>
-        </div>
-        <div class="form-group">
-          <button id="slurp" type="submit" class="btn btn-primary pull-right">Slurp</button>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div class="form-group">
-          <textarea id="text" class="form-control" placeholder="Or paste some text that you would like to search against." title="Must be at least 30 characters long." rows=10></textarea>
-        </div>
-        <div class="form-group">
-          <button id="search" type="submit" class="btn btn-primary pull-right">Search</button>
-          <div id="noResults">
-            <p class="warningLine">No results found. Try again with a longer piece of text or <a href="/explore/">explore</a> some examples for inspiration.</p>
+<div id="region-main">
+</div>
+<div id="region-bottom">
+</div>
+<script id="searchTemplate" type="text/html">
+      <div class="area area-extensionpromo">
+      <div class="row">
+          <div class="col-md-3">
+              <img width="128" height="128" src="/public/images/extensionlogo.png" />
           </div>
-        </div>
-      </fieldset>
-    </form>
+          <div class="col-md-6">
+              <h2>Download the churnalism extension</h2>
+
+              <em>Check news articles for churn while you read them</em>
+          </div>
+          <div class="col-md-3">
+              <br/>
+              <a class="btn btn-primary btn-lg " href="#">Add to Chrome</a><br/><br/>
+              <a class="btn btn-primary btn-lg " href="#">Add to Firefox</a>
+          </div>
+      </div> <!-- end row -->
+      </div>
+      <div class="row">
+          <div class="col-xs-12">
+              <form class="area area-searchform" id="searchForm"  role="form">
+                  <fieldset>
+                      <legend>Enter the URL of an article you'd like to check...</legend>
+                      <div class="form-group">
+                          <input id="url" class="form-control" type="url" placeholder="eg: http://madeupnewspaper.com/latest/scientists-discover-moon-made-of-cheese.html" title="Must be a valid URL."></input>
+                      </div>
+                      <!--
+                      <div class="form-group">
+                          <button id="slurp" type="submit" class="btn btn-lg btn-primary pull-right">Slurp</button>
+                      </div>
+                      -->
+                  </fieldset>
+                  <fieldset>
+                      <legend>... or paste some of its text in here:</legend>
+                      <div class="form-group">
+                          <textarea id="text" class="form-control" placeholder="paste article text here" title="Must be at least 30 characters long." rows=10></textarea>
+                      </div>
+                      <div class="form-group">
+                          <button id="search" type="submit" class="btn btn-lg btn-primary pull-right">Check for churn</button>
+                          <div id="noResults">
+                              <p class="warningLine">No results found. Try again with a longer piece of text or <a href="/explore/">explore</a> some examples for inspiration.</p>
+                          </div>
+                      </div>
+                  </fieldset>
+
+              </form>
+          </div>
+      </div> <!-- end row -->
+  </script>
+  <script id="extensionPromoTemplate" type="text/html">
+      <div class="area">
+          <div class="lead">Download the churnalism extension</div>
+
+          <span>See if the news article you’re reading is churnalism while you read it</span>
+          <div>
+              <a class="btn btn-primary " href="#">Add to Chrome</a>
+              <a class="btn btn-primary " href="#">Add to Firefox</a>
+          </div>
+      </div>
   </script>
   <script id="saveTemplate" type="text/html">
     <form id="saveForm" class="form-horizontal" role="form">
@@ -59,24 +93,6 @@
   <h4><a id="title" href="<%=metaData.source%>"></a></h4>
   <p id="published"></p>
   <div id="textEntered"></div> 
-  </script>
-  <script id="sidebarTemplate" type="text/html">
-    <ul id="tabs" class="nav nav-tabs nav-justified">
-      <li class="active"><a href="#latest" data-toggle="tab">Latest</a></li>
-      <li><a href="#popular" data-toggle="tab">Popular</a></li>
-      <li><a href="#recommended" data-toggle="tab">Recommended</a></li>
-    </ul>
-    <div class="tab-content">
-      <ul id="latest" class="tab-pane active">
-        <li><a>One</a></li>
-      </ul>
-      <ul id="popular" class="tab-pane">
-        <li><a>Two</a></li>
-      </ul>
-      <ul id="recommended" class="tab-pane">
-        <li><a>Three</a></li>
-      </ul>
-    </div>
   </script>
   <script id="resultsTemplate" type="text/html">
     <section></section>

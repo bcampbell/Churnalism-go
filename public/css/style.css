@@ -52,12 +52,6 @@ div#text{
   padding: 0;
 }
 
-.logo {
-    position: absolute;
-    left: -90px;
-    width: 83px;
-    height: 125px;
-}
 
 
 .mstlink {
@@ -101,6 +95,20 @@ div#text{
 	box-shadow: 2px 2px 2px #d3d3d3;
 }
 
+/****
+ * misc crap
+ */
 
-.area { padding: 30px 20px; }
+.area { margin: 2em 0; }
+
+.area-extensionpromo {
+    border-radius: 6px 6px 6px 6px;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+    padding: 1em;
+    text-align: center;
+}
+
+.area-extensionpromo img {
+}
 

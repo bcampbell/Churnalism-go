@@ -27,7 +27,7 @@ var SearchView = Marionette.ItemView.extend({
 	events:{
 		'click #search'	: 'search',
 		'click #save'	: 'save',
-        'click #slurp'  : 'slurp',
+/*        'click #slurp'  : 'slurp', */
 		'keyup'	        : 'showErrors'
 	},
 	ui:{
@@ -49,13 +49,15 @@ var SearchView = Marionette.ItemView.extend({
     		visible: function(val){return val===0}
     	},
         '#search':{
-            observe: 'text',
+            observe: ['text','url'],
             update: function($el, val, model, options){
-                valid=_.isEmpty(model.preValidate('text',model.get('text')));
-                $el.attr("disabled",!valid);
+                valid1=_.isEmpty(model.preValidate('text',model.get('text')));
+                valid2=(!_.isEmpty(model.get("url")))&&(_.isEmpty(model.preValidate('url',model.get('url'))))
+                $el.attr("disabled",!(valid1 || valid2));
             }
         },
         '#url': 'url',
+        /*
         '#slurp':{
             observe: 'url',
             update: function($el, val, model, options){
@@ -63,6 +65,7 @@ var SearchView = Marionette.ItemView.extend({
                 $el.attr("disabled",!valid);
             }
         }
+        */
   	},
   	getTemplate: function(){
   		switch(this.model.get('mode')){
@@ -92,8 +95,12 @@ var SearchView = Marionette.ItemView.extend({
   	search: function(e){
   		e.preventDefault();
   		if(this.model.isValid(true)){
+        // text is filled out, so do a search
   			this.trigger("search")
-  		}
+  		} else {
+        // text missing - assume it's a slurp (TODO: should validate url field)
+  			this.trigger("slurp")
+      }
   	},
   	save: function(e){
   		e.preventDefault();
@@ -101,14 +108,10 @@ var SearchView = Marionette.ItemView.extend({
   			this.trigger("save")
   		}
   	},
-    slurp: function(e){
-        e.preventDefault();
-        this.trigger("slurp");  
-    }
 })
 
 var SideBarView = Marionette.ItemView.extend({
-	template: '#sidebarTemplate',
+	template: '#extensionPromoTemplate',
 });
 
 var ResultView = Marionette.ItemView.extend({
@@ -206,9 +209,8 @@ var App = new Marionette.Application();
 
 App.addInitializer(function(options){
 	App.addRegions({
-		left: '#left',
-		right: '#right',
-		bottom: '#bottom'
+		main: '#region-main',
+		bottom: '#region-bottom'
 	});
 });
 
@@ -263,21 +265,18 @@ var Controller=Marionette.Controller.extend({
 			source: ""
 		});
     	App.Search.set({mode:"search"});
-		App.left.show(App.SearchView);
-		App.right.show(new SideBarView());
+		App.main.show(App.SearchView);
 		App.bottom.close();
     },
     save: function(){
     	App.Search.unset("id");
         App.Search.set({mode:"save"});
-    	App.left.show(App.SearchView);
-		App.right.show(new SideBarView());
+    	App.main.show(App.SearchView);
     	App.bottom.show(new ResultsView({model: App.Search}));
     },
     results: function(){
     	App.Search.set({mode:"saved"});
-    	App.left.show(App.SearchView);
-		App.right.show(new SideBarView());
+    	App.main.show(App.SearchView);
     	App.bottom.show(new ResultsView({model: App.Search}));
     },
     sidebyside: function(){
