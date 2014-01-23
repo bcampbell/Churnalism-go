@@ -17,7 +17,6 @@ var SlurpSearch = Search.extend({
                 "metaData.published"  : moment(data.data_published).format('YYYY-MM-DD'),
             })
             model.trigger('slurped');
-            console.log(data);
         });     
     }
 })
@@ -26,7 +25,7 @@ var SearchView = Marionette.ItemView.extend({
 	template: '#searchTemplate',
 	events:{
 		'click #search'	: 'search',
-		'click #save'	: 'save',
+/*		'click #save'	: 'save', */
 /*        'click #slurp'  : 'slurp', */
 		'keyup'	        : 'showErrors'
 	},
@@ -72,7 +71,7 @@ var SearchView = Marionette.ItemView.extend({
   		case "search":
   			return '#searchTemplate';
   		case "save":
-  			return '#saveTemplate';
+  			return '#showTemplate';
   		case "saved":
   			return '#savedTemplate';
   		case "sidebyside":
@@ -280,7 +279,6 @@ var Controller=Marionette.Controller.extend({
     	App.bottom.show(new ResultsView({model: App.Search}));
     },
     sidebyside: function(){
-    	console.log("sidebyside");
     }
 });
 

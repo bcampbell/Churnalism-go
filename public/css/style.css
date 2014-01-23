@@ -96,6 +96,76 @@ div#text{
 }
 
 /****
+ * results
+ */
+
+#cut {
+	width: 36px;
+	height: 28px;
+	background: url("/public/images/tableIcons.png") 0 0 no-repeat;
+	display: block;
+    /*
+	float: left;
+	margin-left: 18px;
+    */
+}
+#paste {
+	width: 36px;
+	height: 28px;
+	background: url("/public/images/tableIcons.png") -45px 0px no-repeat;
+	display: block;
+    /*
+	float: left;
+	margin-left: 17px;
+    */
+}
+#overlap {
+	width: 42px;
+	height: 28px;
+	background: url("/public/images/tableIcons.png") -83px 0px no-repeat;
+	display: block;
+    /*
+	float: left;
+	margin-left: 15px;
+    */
+}
+
+.data-lg {
+	font-size: 1.5em;
+	font-weight: bold;
+	line-height: 100%;
+
+    margin: 0;
+}
+
+.caption {
+	font-size: 0.75em;
+	color: #404040;
+	text-align: center;
+	line-height: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.vis-head-fudge span { display: inline-block; }
+.vis-head-fudge span:first-child { width: 100px; }
+
+
+.results-group {
+    margin: 1em 0;
+}
+
+.results-group thead {
+    border-bottom: 1px solid black;
+}
+.results-group tbody {
+    background-color: #fff;
+    border-bottom: 1px solid black;
+}
+/*.results-group { text-align: center; } */
+
+
+/****
  * misc crap
  */
 
@@ -107,6 +177,7 @@ div#text{
     background-color: #ffffff;
     padding: 1em;
     text-align: center;
+    height: 100%;
 }
 
 .area-extensionpromo img {

@@ -62,6 +62,68 @@
           </div>
       </div>
   </script>
+  <script id="showTemplate" type="text/html">
+
+  <div class="row">
+    <div class="col-md-8"> 
+              <form class="area area-searchform" id="searchForm"  role="form">
+                  <fieldset>
+                      <div class="form-group">
+                          <label for="url">Enter the URL of an article you'd like to check...</label>
+                          <input id="url" class="form-control" type="url" placeholder="http://" title="Must be a valid URL."></input>
+                      </div>
+                      <!--
+                      <div class="form-group">
+                          <button id="slurp" type="submit" class="btn btn-lg btn-primary pull-right">Slurp</button>
+                      </div>
+                      -->
+                  </fieldset>
+                  <fieldset>
+                      <div class="form-group">
+                      <label for="text">... or paste some of its text in here:</label>
+                          <textarea id="text" class="form-control" placeholder="text goes here" title="Must be at least 30 characters long." rows=10></textarea>
+                      </div>
+                      <div class="form-group">
+                          <button id="search" type="submit" class="btn btn-lg btn-primary pull-right">Check for churn</button>
+                          <div id="noResults">
+                              <p class="warningLine">No results found. Try again with a longer piece of text or <a href="/explore/">explore</a> some examples for inspiration.</p>
+                          </div>
+                      </div>
+                  </fieldset>
+
+              </form>
+              <!--
+        <div class="area">
+        Url: <div class="" id="url"></div>
+        <div class="form-control-static">
+          <h4>Text entered</h4>
+          <div id="text"></div>
+        </div>
+    </div>
+    -->
+    </div> <!-- end col -->
+    <div class="col-md-4 hidden-sm hidden-xs"> 
+      <div class="area area-extensionpromo">
+      <div class="">
+          <div class="">
+              <img width="64" height="64" src="/public/images/extensionlogo.png" />
+          </div>
+          <div class="">
+              <h4>Download the churnalism extension</h4>
+
+              <em>Check news articles for churn while you read them</em>
+          </div>
+          <div class="">
+              <br/>
+              <a class="btn btn-primary " href="#">Add to Chrome</a>
+              <a class="btn btn-primary " href="#">Add to Firefox</a>
+          </div>
+      </div> <!-- end row -->
+      </div>
+
+    </div> <!-- end col -->
+  </div> <!-- end row -->
+  </script>
   <script id="saveTemplate" type="text/html">
     <form id="saveForm" class="form-horizontal" role="form">
         <div class="form-group">
@@ -95,17 +157,20 @@
   <div id="textEntered"></div> 
   </script>
   <script id="resultsTemplate" type="text/html">
-    <section></section>
+      <section><h2>Results</h2></section>
+  </script>
+  <script id="noResultsTemplate" type="text/html">
+      <section><div class="alert alert-warning">No churn found</div></section>
   </script>
   <script id="resultsGroupTemplate" type="text/html">
-  <table class="table table-responsive table-condensed">
+  <table class="table table-responsive table-condensed results-group">
     <thead>
       <tr>
-        <th id="count" class="headingTitle" colspan="2"> <%=title()%> similar to text entered</th>
+          <th id="count" class="headingTitle" colspan="2"><h4><%=title()%> similar</h4></th>
         <th><div id="cut"></div></th>
         <th><div id="paste"></div></th>
         <th><div id="overlap"></div></th>
-        <th>Visualisation</th>
+        <th class="vis-head-fudge"><span>Entered</span><span>Matched</span></th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -128,16 +193,16 @@
       <span class="published"><%=published()%></span>
   </td>
   <td help="Percentage of entered text used in news article">
-      <p class="similarity data"><%=cut()%>%</p>
-      <p class="caption">cut</p>
+      <p class="data-lg"><%=cut()%>%</p>
+      <small class="caption">cut</small>
   </td>
   <td help="Percentage of news article that is copied from entered text">
-      <p class="recycling data"><%=paste()%>%</p>
-      <small class="caption">pasted</p>
+      <p class="data-lg"><%=paste()%>%</p>
+      <small class="caption">pasted</small>
   </td>
   <td  help="Number of consecutive characters that appear in both entered text and news article">
-      <p class="characters data"><%=overlap()%></p>
-      <p class="caption">characters<br/>overlap</p>
+      <p class="data-lg"><%=overlap()%></p>
+      <small class="caption">characters<br/>overlap</small>
   </td>
   <td id="visualisation" class="visualisationCell">
   </td>
