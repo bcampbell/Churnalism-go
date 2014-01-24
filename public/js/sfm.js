@@ -18,7 +18,16 @@ var Document = Backbone.DeepModel.extend({
                 name: group,
                 associations: new DocumentList(docs)
             }
-        }));
+        }), {
+            comparator: function(doc) {
+                // sortBy fn to make sure press releases appear first
+                switch(doc.get("name")) {
+                    case "press release": return 0;
+                    case "news article": return 1;
+                };
+                return 2;
+            }
+        });
     },
     parse: function(response){
         if (_.has(response,"id")){
