@@ -28,7 +28,16 @@ var Document = Backbone.DeepModel.extend({
             associations=_.map(response["associations"],function(a){
                 return _.extend(a,{parent:this});
             },this);
-            response["associations"]=new DocumentList(associations,{parse:true});
+
+            var matches = new Array();
+            // add only those with non-zero score
+            _.each(associations, function(a) {
+                var doc = new Document(a, {parse:true});
+                if(doc.score()>0) {
+                    matches.push(doc);
+                }
+            });
+            response["associations"]=new DocumentList(matches);
         }
         if (_.has(response,'fragments')){
             left=this._mergeFragments(response.fragments,0);
@@ -74,6 +83,14 @@ var Document = Backbone.DeepModel.extend({
         return _.map(this.get('leftFragments'),function(frag){
             return text.substring(frag[0],frag[0]+frag[1])
         });
+    },
+    /* score doc on how well it matches parent. returns integer in range [0..3] */
+    score: function() {
+        var p = this.get("parent");
+        if( p === undefined) {
+            return 0;
+        }
+        return Number((this.get("leftCharacters")/p.get('text').length+this.get("rightCharacters")/this.get("characters"))*1.5).toFixed(0);
     }
 })
 
