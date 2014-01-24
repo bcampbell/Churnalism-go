@@ -153,6 +153,7 @@ div#text{
 
 .results-group {
     margin: 1em 0;
+    width: 100%;
 }
 
 .results-group thead {
@@ -163,8 +164,9 @@ div#text{
     border-bottom: 1px solid black;
 }
 /*.results-group { text-align: center; } */
+.visualisationCell { width: 180px; }
 
-
+.datacell { width: 5em;}
 /****
  * misc crap
  */
