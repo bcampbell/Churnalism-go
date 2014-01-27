@@ -16,7 +16,7 @@ var SlurpSearch = Search.extend({
                 "metaData.source"     : data.url,
                 "metaData.published"  : moment(data.data_published).format('YYYY-MM-DD'),
             })
-            model.trigger('slurped');
+            model.execute();
         });     
     }
 })
@@ -30,7 +30,7 @@ var SearchView = Marionette.ItemView.extend({
         'keyup'         : 'showErrors'
     },
     ui:{
-        'buttons': '#search,#save'
+        'buttons': '#search'
     },
     // Stickit configuration
     bindings: {
@@ -66,18 +66,16 @@ var SearchView = Marionette.ItemView.extend({
         }
         */
     },
+    /*
     getTemplate: function(){
         switch(this.model.get('mode')){
             case "search":
                 return '#searchTemplate';
-            case "save":
+            case "show":
                 return '#showTemplate';
-            case "saved":
-                return '#savedTemplate';
-            case "sidebyside":
-                return '#sidebysideTemplate'
         }
     },
+    */
     onDomRefresh: function(){
         Backbone.Validation.bind(this);
         this.stickit();
@@ -93,20 +91,8 @@ var SearchView = Marionette.ItemView.extend({
     },
     search: function(e){
         e.preventDefault();
-        if(this.model.isValid(true)){
-            // text is filled out, so do a search
-            this.trigger("search")
-        } else {
-            // text missing - assume it's a slurp (TODO: should validate url field)
-            this.trigger("slurp")
-        }
-    },
-    save: function(e){
-        e.preventDefault();
-        if(this.model.isValid(true)){
-            this.trigger("save")
-        }
-    },
+        this.trigger("search")
+    }
 })
 
 var SideBarView = Marionette.ItemView.extend({
@@ -200,7 +186,20 @@ var ResultsView = Marionette.CompositeView.extend({
     itemView: ResultsGroupView,
     itemViewContainer: "section",
     initialize: function(options){
+        //console.log(this.model);
         this.collection=this.model.groupedAssociations("type");
+    },
+    getTemplate: function() {
+        if( this.model.hasResults() ) {
+            if( this.model.numResults() >0 ) {
+                return "#resultsTemplate";
+            } else {
+                return "#noResultsTemplate";
+            }
+        } else {
+            // placeholder - search hasn't been performed yet.
+            return "#nullResultsTemplate";
+        }
     }
 })
 
@@ -219,10 +218,10 @@ App.on("initialize:after", function(){
 
 var AppRouter=Marionette.AppRouter.extend({
     appRoutes: {
-        ""                      : "search",
-        "save(/)"               : "save",
-        ":doctype/:docid(/)"    : "results",
-        ":left#:right(/)"       : "sidebyside"
+        ""                      : "check",
+        "check"                  : "check"
+        //":doctype/:docid(/)"    : "results",
+        //":left#:right(/)"       : "sidebyside",
     }
 });
 
@@ -231,54 +230,66 @@ var Controller=Marionette.Controller.extend({
         App.Search=new SlurpSearch(doc,{parse:true});
         App.Search.on({
             "executed":function(){
-                router.navigate("save/",{trigger:true});
+                //console.log("EXECUTED");
+                // forge a sharable url if available
+                var u = App.Search.get("url") 
+                if (u) {
+                    router.navigate("check?url="+u,{trigger:false});
+                }
+                // if there are results, show em. Otherwise, rely on the search view to show the "none found message"
+                if( App.Search.numResults() > 0 ) {
+                    App.main.show(new ResultsView({model: App.Search}));
+                }
             },
-            "saved":function(){
-                App.Search.associate();
-            },
-            "associated":function(){
-                router.navigate(this.id,{trigger:true});
-            },
-            "slurped": function(){
-                App.Search.execute();
-            }
         });
         App.SearchView=new SearchView({ model:App.Search});
         App.SearchView.on({
             "search":function(){
-                App.Search.execute();
-            },
-            "save": function(){
-                App.Search.save();
-            },
-            "slurp": function(){
-                App.Search.slurp();
+                var model = App.Search;
+                if( model.get('text').length > 0 ) {
+                    // text is filled out, so do a search
+                    //console.log("start text search");
+                    App.Search.execute();
+                } else {
+                    // else, assume it's just a url, so slurp it
+                    //console.log("start slurp search");
+                    App.Search.slurp();
+                }
             }
         });
     },
-    search: function(){
+    check: function() {
+        // fn to grab a parameter from the page URL
+        // (from http://stackoverflow.com/a/523293 )
+        var getParameter = function(paramName) {
+            var searchString = window.location.search.substring(1),
+            i, val, params = searchString.split("&");
+
+            for (i=0;i<params.length;i++) {
+                val = params[i].split("=");
+                if (val[0] == paramName) {
+                    return val[1]
+                }
+            }
+            return null;
+        };
+
         App.Search.unset("associations");
-        App.Search.set("metaData",{
+        App.bottom.close();
+         App.Search.set("metaData",{
             type: "search",
             published: moment().format('YYYY-MM-DD'),
             source: ""
         });
         App.Search.set({mode:"search"});
+
+        var u = getParameter("url");
+        if( u != null ) {
+            //start search immediately
+            App.Search.set({url:u});
+            App.SearchView.trigger("search");
+        }
         App.main.show(App.SearchView);
-        App.bottom.close();
-    },
-    save: function(){
-        App.Search.unset("id");
-        App.Search.set({mode:"save"});
-        App.main.show(App.SearchView);
-        App.bottom.show(new ResultsView({model: App.Search}));
-    },
-    results: function(){
-        App.Search.set({mode:"saved"});
-        App.main.show(App.SearchView);
-        App.bottom.show(new ResultsView({model: App.Search}));
-    },
-    sidebyside: function(){
     }
 });
 

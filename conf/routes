@@ -9,6 +9,7 @@ GET     /public/*filepath                       Static.Serve("public")
 
 GET     /                                       App.Index
 GET		/save 									App.Index
+GET		/check 									App.Check
 GET		/slurp/									App.Slurp
 POST    /search									App.Search
 POST	/document								App.Document

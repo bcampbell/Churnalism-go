@@ -46,6 +46,11 @@ func (c App) Index() revel.Result {
 	return c.RenderTemplate("App/Result.html")
 }
 
+// a sharable page /check?url=....
+func (c App) Check() revel.Result {
+	return c.RenderTemplate("App/Result.html")
+}
+
 func (c App) Result(doctype, docid uint32) revel.Result {
 	url := fmt.Sprintf("%s/document/%d/%d/", apiAddress(), doctype, docid)
 	resp, err := http.Get(url)

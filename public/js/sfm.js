@@ -72,21 +72,6 @@ var Document = Backbone.DeepModel.extend({
         })
         return merged;
     },
-    save: function(){
-        fields=_.extend(this.get("metaData"),this.pick(["title","text"]));
-        model=this;
-        $.post(this.url(),fields).done(function(data){
-            model.set("id",data.target.doctype+"/"+data.target.docid+"/");
-            model.trigger('saved');
-        })
-    },
-    associate: function(){
-        model=this;
-        url='/association/'+this.id;
-        $.post(url).done(function(){
-            model.trigger('associated');
-        })
-    },
     textFragments: function(){
         text=this.get('parent').get('text');
         return _.map(this.get('leftFragments'),function(frag){
@@ -142,12 +127,16 @@ var Search = Document.extend({
         return this.get("associations").length
     },
     execute: function(){
+        //console.log("FOO");
         model=this;
         $.post('/search/',{text: this.get("text")}).done(function(data){
+
+            //console.log("BAR");
             model.set(model.parse(data));
-            if (model.hasResults()){
-                model.trigger('executed');
+            if(!model.has("associations")) {
+                model.set("associations", new DocumentList());
             }
+            model.trigger('executed');
         })
     }
 })
