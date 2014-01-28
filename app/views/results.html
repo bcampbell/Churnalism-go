@@ -3,7 +3,7 @@
 <div id="region-bottom">
 </div>
 <script id="searchTemplate" type="text/html">
-      <div class="area area-extensionpromo">
+    <div class="area area-extensionpromo">
       <div class="row">
           <div class="col-md-3">
               <img width="128" height="128" src="/public/images/extensionlogo.png" />
@@ -22,6 +22,7 @@
       </div>
       <div class="row">
           <div class="col-xs-12">
+
               <form class="area area-searchform" id="searchForm"  role="form">
                   <fieldset>
                       <div class="form-group">
@@ -41,11 +42,11 @@
                       </div>
                       <div class="form-group">
                           <button id="search" type="submit" class="btn btn-lg btn-primary pull-right">Check for churn</button>
-                          <div id="noResults">
-                              <p class="warningLine">No results found. Try again with a longer piece of text or <a href="/explore/">explore</a> some examples for inspiration.</p>
-                          </div>
                       </div>
                   </fieldset>
+                          <div id="noResults">
+                        <div class="alert alert-warning">No churn found</div>
+                          </div>
 
               </form>
           </div>
@@ -157,10 +158,29 @@
   <div id="textEntered"></div> 
   </script>
   <script id="resultsTemplate" type="text/html">
-      <section><h2>Results</h2></section>
+  <div class="results-container area ">
+      <h3>Results</h3>
+      <% if( url!==undefined ) { %>
+              <div class="share-links">
+                  <a class="share-link share-link-twitter" title="Share via Twitter" href="<%=shareTwitter()%>">Twitter</a>
+                  <a class="share-link share-link-facebook" title="Share via Facebook" href="<%=shareFacebook()%>">Facebook</a>
+                  <a class="share-link share-link-googleplus" title="Share via Google Plus" href="<%=shareGooglePlus()%>">Google Plus</a>
+                  <a class="share-link share-link-stumbleupon" title="Share via Stumbleupon" href="<%=shareStumbleupon()%>">Stumbleupon</a>
+                </div>
+                <% } else {%>
+                <% } %>
+  <div class="result-group-container">
+  </div>
+      <a class="btn btn-default btn-md" href="/" ><span class="glyphicon glyphicon-arrow-left"></span> Go back</a>
+  </div>
   </script>
   <script id="noResultsTemplate" type="text/html">
-      <section><div class="alert alert-warning">No churn found</div></section>
+  <div class="results-container">
+  <div class="result-group-container area">
+      <div class="alert alert-info lead">No churn found</div>
+      <a class="btn btn-default btn-md" href="/" ><span class="glyphicon glyphicon-arrow-left"></span> Go back</a>
+  </div>
+  </div>
   </script>
   <script id="nullResultsTemplate" type="text/html">
   </script>

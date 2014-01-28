@@ -99,6 +99,10 @@ div#text{
  * results
  */
 
+.results-container {
+    position: relative;
+}
+
 #cut {
 	width: 36px;
 	height: 28px;
@@ -167,6 +171,40 @@ div#text{
 .visualisationCell { width: 180px; }
 
 .datacell { width: 5em;}
+
+/****
+ * share buttons
+ */
+
+.share-links {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+.share-link {
+    width: 32px;
+    height: 32px;
+    text-indent: -9999px;
+    display: inline-block;
+    background-image: url("/public/images/sharebuttons.png");
+ }
+
+.share-link:hover {
+}
+.share-link:active {
+    position: relative;
+    top: 1px;
+}
+
+.share-link-facebook { background-position: -0px -0px; }
+.share-link-twitter { background-position: -32px -0px; }
+.share-link-googleplus { background-position: -64px -0px; }
+.share-link-stumbleupon { background-position: -96px -0px; }
+
+
+
 /****
  * misc crap
  */

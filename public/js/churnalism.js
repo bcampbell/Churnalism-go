@@ -184,7 +184,7 @@ var ResultsGroupView = Marionette.CompositeView.extend({
 var ResultsView = Marionette.CompositeView.extend({
     template: '#resultsTemplate',
     itemView: ResultsGroupView,
-    itemViewContainer: "section",
+    itemViewContainer: ".result-group-container",
     initialize: function(options){
         //console.log(this.model);
         this.collection=this.model.groupedAssociations("type");
@@ -200,6 +200,19 @@ var ResultsView = Marionette.CompositeView.extend({
             // placeholder - search hasn't been performed yet.
             return "#nullResultsTemplate";
         }
+    },
+    templateHelpers:{
+        shareURL: function() {
+            if( this.url ) {
+                return window.location.href;
+            } else {
+                return null;
+            }
+        },
+        shareTwitter: function() { return "http://twitter.com/share?url=" + encodeURIComponent(this.url); },
+        shareFacebook: function() { return "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(this.url); },
+        shareStumbleupon: function() { return "http://www.stumbleupon.com/submit?url=" + encodeURIComponent(this.url); },
+        shareGooglePlus: function() { return "https://plus.google.com/share?url=" + encodeURIComponent(this.url); },
     }
 })
 
@@ -232,14 +245,14 @@ var Controller=Marionette.Controller.extend({
             "executed":function(){
                 //console.log("EXECUTED");
                 // forge a sharable url if available
-                var u = App.Search.get("url") 
+                var u = App.Search.get("url");
                 if (u) {
                     router.navigate("check?url="+u,{trigger:false});
                 }
                 // if there are results, show em. Otherwise, rely on the search view to show the "none found message"
-                if( App.Search.numResults() > 0 ) {
+             //   if( App.Search.numResults() > 0 ) {
                     App.main.show(new ResultsView({model: App.Search}));
-                }
+             //   }
             },
         });
         App.SearchView=new SearchView({ model:App.Search});
