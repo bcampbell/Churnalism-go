@@ -129,6 +129,7 @@ var Search = Document.extend({
     execute: function(){
         //console.log("FOO");
         model=this;
+        this.set('state','busy');
         $.post('/search/',{text: this.get("text")}).done(function(data){
 
             //console.log("BAR");
@@ -136,7 +137,10 @@ var Search = Document.extend({
             if(!model.has("associations")) {
                 model.set("associations", new DocumentList());
             }
+            model.set('state','');
             model.trigger('executed');
-        })
+        }).fail(function() {
+            model.set('state','error');
+        });
     }
 })

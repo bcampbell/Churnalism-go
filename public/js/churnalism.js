@@ -9,15 +9,19 @@ var SlurpSearch = Search.extend({
     },
     slurp: function(){
         model=this;
-        $.get('/slurp/',{url: this.get("url")}).done(function(data){
+        this.set('state','busy');
+        $.get('/slurp/',{url: this.get("url")} ).done(function(data){
             model.set({
                 "text"                : _(data.content).stripTags().trim().unescapeHTML().value(),
                 "title"               : data.title,
                 "metaData.source"     : data.url,
                 "metaData.published"  : moment(data.data_published).format('YYYY-MM-DD'),
             })
+            model.set('state','');
             model.execute();
-        });     
+        }).fail(function() {
+            model.set('state','error');
+        });
     }
 })
 
@@ -27,10 +31,16 @@ var SearchView = Marionette.ItemView.extend({
         'click #search' : 'search',
         /*      'click #save'   : 'save', */
         /*        'click #slurp'  : 'slurp', */
-        'keyup'         : 'showErrors'
+        'keyup'         : 'showErrors',
+    },
+    modelEvents: {
+        'change:state'  : 'showState'
     },
     ui:{
-        'buttons': '#search'
+        'buttons': '#search',
+        'busy': '.busy-indicator',
+        'error': '.error-indicator',
+        'fields': '#url, #text'
     },
     // Stickit configuration
     bindings: {
@@ -43,17 +53,14 @@ var SearchView = Marionette.ItemView.extend({
             updateMethod: 'html',
             onGet: function(val) { return _.lines(_.prune(val,800)).map(function(l){return "<p>"+l+"</p>"}); }
         },
-        '#noResults':{
-            observe: 'totalRows',
-            visible: function(val){return val===0}
-        },
         '#search':{
             observe: ['text','url'],
             update: function($el, val, model, options){
                 valid1=_.isEmpty(model.preValidate('text',model.get('text')));
                 valid2=(!_.isEmpty(model.get("url")))&&(_.isEmpty(model.preValidate('url',model.get('url'))))
                 $el.attr("disabled",!(valid1 || valid2));
-            }
+            },
+
         },
         '#url': 'url',
         /*
@@ -66,21 +73,12 @@ var SearchView = Marionette.ItemView.extend({
         }
         */
     },
-    /*
-    getTemplate: function(){
-        switch(this.model.get('mode')){
-            case "search":
-                return '#searchTemplate';
-            case "show":
-                return '#showTemplate';
-        }
-    },
-    */
     onDomRefresh: function(){
         Backbone.Validation.bind(this);
         this.stickit();
         this.showErrors();
         this.$el.tooltip({selector:':input',trigger:'focus',animation:false});
+        this.showState();
     },
     showErrors: function(){
         el=this.$el;
@@ -92,6 +90,32 @@ var SearchView = Marionette.ItemView.extend({
     search: function(e){
         e.preventDefault();
         this.trigger("search")
+    },
+    showState: function(e) {
+        // update the view to reflect the current state of the request (ie busy indicators, error messages...)
+        var state = this.model.get('state');
+        console.log("showState ",state);
+        console.log(this);
+        // guards around ui elements, because view might not be rendered yet (sigh...)
+        if(this.ui.busy.show !== undefined) {
+            if(state == 'busy') {
+                // a request is in-flight...
+                this.ui.busy.show();
+                this.ui.buttons.hide();
+                this.ui.fields.prop('disabled', true);
+            } else {
+                this.ui.busy.hide();
+                this.ui.buttons.show();
+                this.ui.fields.prop('disabled', false);
+            }
+        }
+        if( this.ui.error.show !== undefined) {
+            if(state == 'error') {
+                this.ui.error.show();
+            } else {
+                this.ui.error.hide();
+            }
+        }
     }
 })
 
