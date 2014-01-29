@@ -211,6 +211,11 @@ div#text{
 
 .area { margin: 2em 0; }
 
+
+.area-textblock {
+    max-width: 40em;
+}
+
 .area-extensionpromo {
     border-radius: 6px 6px 6px 6px;
     border: 1px solid #cccccc;

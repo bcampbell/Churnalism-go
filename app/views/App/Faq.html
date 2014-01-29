@@ -1,96 +1,103 @@
 {{set . "Title" "Frequently Asked Questions"}}
 {{set . "Description" "What is Churnalism.com? Churnalism.com is an independent, non-profit website to help the public distinguish between original journalism and 'churnalism'."}}
 {{template "header.html" .}}
+    <div class="area area-textblock">
     <h2>Frequently Asked Questions</h2>
     <dl>
-        <dt>What is churnalism.com?</dt>
-        <dd>
+        <h3>What is churnalism.com?</h3>
+        <div>
             <p>Churnalism.com is an independent, non-profit website built by the <a href="http://mediastandardstrust.org">Media Standards Trust</a> (charity number <a href="http://www.charitycommission.gov.uk/search-for-a-charity/?txt=1113680">1113680</a>) to help the public distinguish between original journalism and &lsquo;churnalism&rsquo;&rsquo;.</p>
-        </dd>
+        </div>
 
-        <dt>What is &lsquo;churnalism&rsquo;?</dt>
-        <dd>
-            <p>&lsquo;Churnalism&rsquo; is a news article that is published as journalism, but is essentially a press release without much added. In his landmark book, <em><a href="http://www.flatearthnews.net/">Flat Earth News</a><em>, <a href="http://www.nickdavies.net/">Nick Davies</a> wrote how &lsquo;churnalism&rsquo; is produced by:</p>
+        <h3>What is &lsquo;churnalism&rsquo;?</h3>
+        <div>
+            <p>&lsquo;Churnalism&rsquo; is a news article that is published as journalism, but is essentially a press release without much added. In his landmark book, <em><a href="http://www.flatearthnews.net/">Flat Earth News</a></em>, <a href="http://www.nickdavies.net/">Nick Davies</a> wrote how &lsquo;churnalism&rsquo; is produced by:</p>
             <blockquote>&ldquo;Journalists who are no longer gathering news but are reduced instead to passive processors of whatever material comes their way, churning out stories, whether real event or PR artifice, important or trivial, true or false&rdquo; (p.59).</blockquote>       
             <p>According to the <a href="http://www.cardiff.ac.uk/jomec/research/researchgroups/journalismstudies/fundedprojects/qualitypress.html">Cardiff University research</a> that informed Davies&rsquo; book, 54% of news articles have some form of PR in them. The word &lsquo;churnalism&rsquo; has been attributed to BBC journalist Waseem Zakir.</p>
             <p>Of course not all churnalism is bad. Some press releases are clearly in the public interest (medical breakthroughs, government announcements, school closures and so on). But even in these cases, it is better that people should know what press release the article is based on than for the source of the article to remain hidden.</p>
-        </dd>
+        </div>
         
-        <dt>Why did you build churnalism.com?</dt>
-        <dd>
+        <h3>Why did you build churnalism.com?</h3>
+        <div>
             <p>We built the site as a public resource &mdash; to raise awareness about churnalism, to help people identify churnalism, and to encourage original journalism.</p>
-        </dd>
+        </div>
     
-        <dt>Where did the idea for churnalism.com come from?</dt>
-        <dd>
-            <p>The idea for churnalism first emerged back in 2006 when Tom Steinberg, Chris Lightfoot, Francis Irving and Martin Moore met for a sandwich on Parkers Piece in Cambridge.</p>
-        </dd>
+        <h3>Where did the idea for churnalism.com come from?</h3>
+        <div>
+            <p>The idea for churnalism first emerged back in 2006 when <a href="https://wikipedia.org/wiki/Tom_Steinberg">Tom Steinberg</a>,
+            <a href="https://wikipedia.org/wiki/Chris_Lightfoot">Chris Lightfoot</a>,
+            <a href="https://wikipedia.org/wiki/Francis_Irving">Francis Irving</a> and <a href="http://martinjemoore.com/">Martin Moore</a>
+            met for a sandwich on <a href="https://en.wikipedia.org/wiki/Parker%27s_Piece">Parkers Piece</a> in Cambridge.</p>
+        </div>
     
-        <dt>How does churnalism.com work?</dt>
-        <dd>
-            <p>The site compresses all articles published on national newspaper websites, on BBC news, and Sky news online, into a series of numbers based on 15 character strings (using a <a href="http://en.wikipedia.org/wiki/Hash_function">hash function</a>) and then stores them in a fast access database. When someone pastes in some text and clicks 'compare', the churn engine compresses the text entered and then searches for similar compressions (or 'common hashes'). If the engine finds any articles where the similarity is greater than 20%, then it suggests the article may be churn. Churnalism.com is powered off the back of the database of over three million compressed articles in <a href="http://journalisted.com">journalisted.com</a>.</p>
-        </dd>
+        <h3>How does churnalism.com work?</h3>
+        <div>
+            <p>The indexes press releases (and some news articles). The work is handled by
+            <a href="https://github.com/donovanhide/superfastmatch-go">Superfastmatch</a>, with the
+            website itself just acting as a thin front end on top of that.
+            </p>
+        </div>
     
-        <dt>What does churnalism.com do?</dt>
-        <dd>
-            <p>This is what this website helps people do. On churnalism.com you can:</p>
+        <h3>What press releases are covered?</h3>
+        <div>
+            Currently, we're sourcing press releases from:
             <ul>
-                <li>Compare a press release with over three million articles published by any national newspaper website, the BBC or Sky News since 2007</li>
-                <li>See the percentage of the press release cut and pasted into news articles, and the number of characters that overlap</li>
-                <li>See the press release side-by-side with an image of the article, showing which bits have been copied</li>
-                <li>Share examples of churn via twitter and facebook</li>
-                <li>Search examples of churn saved by other people and scraped by churnalism.com</li>
+                <li>tesco</li>
+                <li>asda</li>
+                <li>waitrose</li>
+                <li>marksandspencer</li>
+                <li>sainsburys</li>
+                <li>morrisons</li>
+                <li>cooperative</li>
+                <li>barclays</li>
+                <li>virginmoney</li>
+                <li>travelodge</li>
+                <li>tate</li>
+                <li>gov.uk-announce</li>
+                <li>eurekalert.com</li>
+                <li>uk.prweb.com</li>
+                <li>prnewswire.co.uk</li>
+                <li>policyexchange.org.uk</li>
+                <li>migrationwatchuk.org</li>
+                <li>taxpayersalliance.com</li>
+                <li>greenpeace.org.uk</li>
+                <li>shelter.org.uk</li>
+                <li>greenparty.org.uk</li>
+                <li>labour.org.uk</li>
+                <li>libdems.org.uk</li>
+                <li>illicitencounters.com</li>
+                <li>bbc</li>
+                <li>bskyb</li>
+                <li>itv</li>
+                <li>channel5</li>
+                <li>channel4</li>
+                <li>72point</li>
             </ul>
-        </dd>
-
-        <dt>Why do people have to paste in press releases to churnalism.com?</dt>
-        <dd>
-            <p>Many press releases are sent directly to news organisations and/or journalists and are never published online.</p>
-            <p>For this reason the site relies on you - the public - to paste in and save the text of press releases. Once you&rsquo;ve pasted them in and saved them, then other people can see them too, creating a public resource connecting press releases with news articles.</p>
-            <p>To help things along the site also automatically collects and compares some press releases from a few notable public and private organisations (eg. the government news distribution service, Tesco, Sainsbury&rsquo;s, Waitrose).</p>
-            <p>If you know of any good sources of press releases on the web then please let us know (by emailing <a href="mailto:team@churnalism.com">team@churnalism.com</a>) so we can automatically collect and compare them.</p>
-        <dd>
+            We intend to increase our coverage of press release sources. If you know of a good source we're missing,
+            <a href="/contact">contact us</a>! Or just <a href="https://github.com/bcampbell/ukpr">send us patches</a>.
+        </div>
     
-        <dt>What effect will churnalism.com have on journalism?</dt>
-        <dd>
+        <h3>What effect will churnalism.com have on journalism?</h3>
+        <div>
             <p>Our hope is that, eventually, this website should become redundant, as news articles link to sources as a matter of course and provide comparisons of articles with press releases themselves.</p>
             <p>In the meantime churnalism.com ought to provide a useful and constructive (and perhaps slightly mischievous) public service.</p>
-        </dd>
+        </div>
 
-        <dt>Who developed the site?</dt>
-        <dd>
-           <p>The technology behind the site was developed by <a href="http://www.availableimagination.com/">Donovan Hide</a>, with some help from <a href="http://scumways.com/">Ben Campbell</a>. The site was conceived and developed by <a href="http://martinjemoore.com/">Martin Moore</a> and <a href="http://scumways.com/">Ben Campbell</a> with support from <a href="http://uk.linkedin.com/pub/gavin-freeguard/5/a36/1a2">Gavin Freeguard</a> and <a href="http://camillaschickova.com/">Camilla Schick</a>. <a href="http://unitedagents.co.uk/chris-atkins">Chris Atkins</a> helped to raise awareness about the site. It was designed by <a href="http://www.double-sided.com/">Double Sided</a>.</p>
-        </dd>
+        <h3>Who developed the site?</h3>
+        <div>
+           <p>The technology behind the site was developed by <a href="http://www.availableimagination.com/">Donovan Hide</a>, with some help from <a href="http://scumways.com/">Ben Campbell</a>. The site was conceived and developed by <a href="http://martinjemoore.com/">Martin Moore</a> and <a href="http://scumways.com/">Ben Campbell</a> with support from <a href="http://uk.linkedin.com/pub/gavin-freeguard/5/a36/1a2">Gavin Freeguard</a> and <a href="http://camillaschickova.com/">Camilla Schick</a>. <a href="http://unitedagents.co.uk/chris-atkins">Chris Atkins</a> helped to raise awareness about the site. The original site design was by <a href="http://www.double-sided.com/">Double Sided</a> (and subsequently butchered by Ben during a revamp :-).</p>
+        </div>
         
-        <dt>Who is the site run by and how is it funded?</dt>
-        <dd>
+        <h3>Who is the site run by and how is it funded?</h3>
+        <div>
             <p>The site is run by the <a href="http://mediastandardstrust.org">Media Standards Trust</a> with funding from charitable foundations and donations. If you would like to support churnalism.com you can donate to the Media Standards Trust at <a href="http://www.justgiving.com/mediastandardstrust/Donate">Just Giving</a>.</p>
             <p>If you would like to discuss the site, or would like to offer suggestions as to how it could be improved, please contact us at <a href="mailto:team@churnalism.com">team@churnalism.com</a>.</p>
-        </dd>
+        </div>
     
-        <dt>Compatibility with different internet browsers</dt> 
-        <dd>
-            <p>Churnalism.com works in IE8, IE9, Firefox, Safari and Chrome. It does not work in IE6 or IE7. To get it to work in IE6 or IE7 would take us about two more weeks programming time.</p>
-        </dd>
-
-        <dt>How can I get involved?</dt>
-        <dd>
-            <p>To work, churnalism.com needs members of the public to paste in and save press releases that they receive and/or find. Once the press releases have been pasted in and saved, then other people can see them too, creating a public resource connecting press releases with news articles. If you know of any good sources of press releases on the web then please let us know (by emailing <a href="mailto:team@churnalism.com">team@churnalism.com</a>) so we can automatically collect and compare them. Would you like to help write a press release scraper? Instructions <a href="https://github.com/mediastandardstrust/pr_scrapers">here</a>.</p>
-        </dd>
-
-        <dt>How can I get in touch?</dt>
-        <dd>
-            <p>You can contact us via email at <a href="mailto:team@churnalism.com">team@churnalism.com</a>, by phone at +44 (0)20 7727 5252, or by letter at Media Standards Trust, 5/7 Vernon Yard, Portobello Road, London W11 2DX.
-            </p>
-        </dd>
-    
-        <dt>Acknowledgements</dt>
-        <dd>
-           <p>This site makes use of <a href="http://www.djangoproject.com">Django</a>, <a href="http://fallabs.com/kyotocabinet/">Kyoto Cabinet</a> and <a href="http://fallabs.com/kyototycoon/">Kyoto Tycoon</a>. Thanks to <a href="http://neil.fraser.name/">Neil Fraser</a> for algorithmic advice and inspiration, <a href="http://fallabs.com/mikio/">Mikio Hirabayashi</a> for advice, features and bug fixes, <a href="http://jackmottram.com">Jack Mottram</a> for help with testing and CSS and finally Pete at <a href="http://www.mythic-beasts.com/">Mythic Beasts</a> for advice and help with server configuration.</p>
-        </dd>
-        <dt>What news articles does it cover?</dt>
-        <dd>
-            <p>Right now churnalism.com covers the UK national press, the BBC and Sky news online. It has most articles from these outlets going back to early 2007. Articles are updated and indexed every few hours. We hope to extend coverage to include local and specialist publications, but that depends on how the site is used and on future funding.</p>
-        </dd>
+        <h3>Acknowledgements</h3>
+        <div>
+           <p>Thanks to <a href="http://neil.fraser.name/">Neil Fraser</a> for algorithmic advice and inspiration, <a href="http://fallabs.com/mikio/">Mikio Hirabayashi</a> for advice, features and bug fixes, <a href="http://jackmottram.com">Jack Mottram</a> for help with testing and CSS and finally Pete at <a href="http://www.mythic-beasts.com/">Mythic Beasts</a> for advice and help with server configuration.</p>
+        </div>
     </dl>
+</div>
 {{template "footer.html" .}}
