@@ -159,7 +159,7 @@
   <script id="resultsTemplate" type="text/html">
   <div class="results-container area ">
       <h3>Results</h3>
-      <% if( url!==undefined ) { %>
+      <% if( typeof url !== 'undefined' ) { %>
               <div class="share-links">
                   <a class="share-link share-link-twitter" title="Share via Twitter" href="<%=shareTwitter()%>">Twitter</a>
                   <a class="share-link share-link-facebook" title="Share via Facebook" href="<%=shareFacebook()%>">Facebook</a>
