@@ -94,8 +94,6 @@ var SearchView = Marionette.ItemView.extend({
     showState: function(e) {
         // update the view to reflect the current state of the request (ie busy indicators, error messages...)
         var state = this.model.get('state');
-        console.log("showState ",state);
-        console.log(this);
         // guards around ui elements, because view might not be rendered yet (sigh...)
         if(this.ui.busy.show !== undefined) {
             if(state == 'busy') {
