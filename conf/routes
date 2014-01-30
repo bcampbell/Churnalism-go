@@ -8,17 +8,21 @@ module:testrunner
 GET     /public/*filepath                       Static.Serve("public")
 
 GET     /                                       App.Index
-GET		/save 									App.Index
+#GET		/save 									App.Index
 GET		/check 									App.Check
 GET		/slurp/									App.Slurp
 POST    /search									App.Search
-POST	/document								App.Document
-POST	/association/:doctype/:docid			App.Association
-POST	/suggest								App.Suggest
+#POST	/document								App.Document
+#POST	/association/:doctype/:docid			App.Association
+#POST	/suggest								App.Suggest
 GET     /faq									App.Faq
 GET     /contact								App.Contact
-GET     /examples								App.Examples
-GET     /explore								App.Explore
-POST    /browse 								App.Browse
-GET     /api									App.Api
-GET     /:doctype/:docid						App.Result
+#GET     /examples								App.Examples
+#GET     /explore								App.Explore
+#POST    /browse 								App.Browse
+#GET     /api									App.Api
+#GET     /:doctype/:docid						App.Result
+
+# handle legacy shared urls
+GET     /legacy                                 App.Legacy
+GET     /:shareid                               App.RedirectToLegacy

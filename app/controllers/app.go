@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"regexp"
 	"strings"
 )
 
@@ -117,6 +118,18 @@ func (c App) Faq() revel.Result {
 }
 
 func (c App) Contact() revel.Result {
+	return c.Render()
+}
+
+func (c App) RedirectToLegacy(shareid string) revel.Result {
+	matched, err := regexp.MatchString("^[0-9a-z]{1,10}$", shareid)
+	if err == nil && matched {
+		return c.Redirect("/legacy")
+	}
+	return c.NotFound("Not found")
+}
+
+func (c App) Legacy() revel.Result {
 	return c.Render()
 }
 
