@@ -27,7 +27,7 @@ body {
 
 div#text{
   overflow:auto;
-  height:250px;
+  height: 8em;
 }
 
 
@@ -202,6 +202,23 @@ div#text{
 .share-link-twitter { background-position: -32px -0px; }
 .share-link-googleplus { background-position: -64px -0px; }
 .share-link-stumbleupon { background-position: -96px -0px; }
+
+
+
+/****
+ */
+.oneliner {
+    text-overflow: ellipsis;
+/*    display: inline-block;
+    vertical-align: top;
+    */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.oneliner:hover {
+    white-space: normal;
+}
 
 
 

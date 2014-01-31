@@ -213,11 +213,7 @@ var ResultsView = Marionette.CompositeView.extend({
     },
     getTemplate: function() {
         if( this.model.hasResults() ) {
-            if( this.model.numResults() >0 ) {
                 return "#resultsTemplate";
-            } else {
-                return "#noResultsTemplate";
-            }
         } else {
             // placeholder - search hasn't been performed yet.
             return "#nullResultsTemplate";

@@ -51,135 +51,55 @@
           </div>
       </div> <!-- end row -->
   </script>
-  <script id="extensionPromoTemplate" type="text/html">
-      <div class="area">
-          <div class="lead">Download the churnalism extension</div>
-
-          <span>See if the news article you’re reading is churnalism while you read it</span>
-          <div>
-              <a class="btn btn-primary " href="#">Add to Chrome</a>
-              <a class="btn btn-primary " href="#">Add to Firefox</a>
-          </div>
-      </div>
-  </script>
-  <script id="showTemplate" type="text/html">
-
-  <div class="row">
-    <div class="col-md-8"> 
-              <form class="area area-searchform" id="searchForm"  role="form">
-                  <fieldset>
-                      <div class="form-group">
-                          <label for="url">Enter the URL of an article you'd like to check...</label>
-                          <input id="url" class="form-control" type="url" placeholder="http://" title="Must be a valid URL."></input>
-                      </div>
-                      <!--
-                      <div class="form-group">
-                          <button id="slurp" type="submit" class="btn btn-lg btn-primary pull-right">Slurp</button>
-                      </div>
-                      -->
-                  </fieldset>
-                  <fieldset>
-                      <div class="form-group">
-                      <label for="text">... or paste some of its text in here:</label>
-                          <textarea id="text" class="form-control" placeholder="text goes here" title="Must be at least 30 characters long." rows=10></textarea>
-                      </div>
-                      <div class="form-group">
-                          <button id="search" type="submit" class="btn btn-lg btn-primary pull-right">Check for churn</button>
-                          <div id="noResults">
-                              <p class="warningLine">No results found. Try again with a longer piece of text or <a href="/explore/">explore</a> some examples for inspiration.</p>
-                          </div>
-                      </div>
-                  </fieldset>
-
-              </form>
-              <!--
-        <div class="area">
-        Url: <div class="" id="url"></div>
-        <div class="form-control-static">
-          <h4>Text entered</h4>
-          <div id="text"></div>
-        </div>
-    </div>
-    -->
-    </div> <!-- end col -->
-    <div class="col-md-4 hidden-sm hidden-xs"> 
-      <div class="area area-extensionpromo">
-      <div class="">
-          <div class="">
-              <img width="64" height="64" src="/public/images/extensionlogo.png" />
-          </div>
-          <div class="">
-              <h4>Download the churnalism extension</h4>
-
-              <em>Check news articles for churn while you read them</em>
-          </div>
-          <div class="">
-              <br/>
-              <a class="btn btn-primary " href="#">Add to Chrome</a>
-              <a class="btn btn-primary " href="#">Add to Firefox</a>
-          </div>
-      </div> <!-- end row -->
-      </div>
-
-    </div> <!-- end col -->
-  </div> <!-- end row -->
-  </script>
-  <script id="saveTemplate" type="text/html">
-    <form id="saveForm" class="form-horizontal" role="form">
-        <div class="form-group">
-          <label class="control-label col-md-1" for="title">Title</label>
-          <div class="col-md-11">
-            <input id="title" class="form-control" type="text" title="What you want the document listed as." placeholder="e.g. Big Corp launches new product"></input>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-md-1" for="source">Source</label>
-          <div class="col-md-5">
-            <input id="source" class="form-control" type="url" title="Where the document was published. Must be a valid" placeholder="e.g. http://www.dailymail.co.uk/tvshowbiz/article-2415420"></input>
-          </div>
-          <label class="control-label col-md-2" for="published">Published</label>
-          <div class="col-md-3">
-            <input id="published" class="form-control" type="date" title="When the document was published." placeholder="e.g. 21/12/2012"></input>
-          </div>
-          <div class="col-md-1">
-            <button id="save" type="submit" class="btn btn-primary pull-right">Save</button>
-          </div>
-        </div>
-        <div class="form-control-static">
-          <h4>Text entered</h4>
-          <div id="text"></div>
-        </div>
-    </form>
-  </script>
-  <script id="savedTemplate" type="text/html">
-  <h4><a id="title" href="<%=metaData.source%>"></a></h4>
-  <p id="published"></p>
-  <div id="textEntered"></div> 
-  </script>
   <script id="resultsTemplate" type="text/html">
-  <div class="results-container area ">
-      <h3>Results</h3>
-      <% if( typeof url !== 'undefined' ) { %>
-              <div class="share-links">
-                  <a class="share-link share-link-twitter" title="Share via Twitter" href="<%=shareTwitter()%>">Twitter</a>
-                  <a class="share-link share-link-facebook" title="Share via Facebook" href="<%=shareFacebook()%>">Facebook</a>
-                  <a class="share-link share-link-googleplus" title="Share via Google Plus" href="<%=shareGooglePlus()%>">Google Plus</a>
-                  <a class="share-link share-link-stumbleupon" title="Share via Stumbleupon" href="<%=shareStumbleupon()%>">Stumbleupon</a>
+      <div class="row">
+            <div class="col-md-8">
+                <div class="area area-querysummary">
+                    <h3>Searched for:</h3>
+                    <% if( typeof url !== 'undefined' ) { %>
+                        <div class="well well-sm oneliner" "id="url"><%=url%></div>
+                    <% } %>
+                    <div  class="well well-sm" id="text"><%=text %></div>
+
                 </div>
-                <% } else {%>
-                <% } %>
-  <div class="result-group-container">
-  </div>
-      <a class="btn btn-default btn-md" href="/" ><span class="glyphicon glyphicon-arrow-left"></span> Go back</a>
-  </div>
-  </script>
-  <script id="noResultsTemplate" type="text/html">
-  <div class="results-container">
-  <div class="result-group-container area">
-      <div class="alert alert-info lead">No churn found</div>
-      <a class="btn btn-default btn-md" href="/" ><span class="glyphicon glyphicon-arrow-left"></span> Go back</a>
-  </div>
-  </div>
+            </div> <!-- end col -->
+            <div class="col-md-4 hidden-sm hidden-xs"> 
+                <div class="area area-extensionpromo">
+                    <div class="">
+                        <img width="64" height="64" src="/public/images/extensionlogo.png" />
+                    </div>
+                    <div>
+                         <h4>Download the churnalism extension</h4>
+                         <em>Check news articles for churn while you read them</em>
+                    </div>
+                    <div>
+                        <br/>
+                        <a class="btn btn-primary " href="#">Add to Chrome</a>
+                        <a class="btn btn-primary " href="#">Add to Firefox</a>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+      </div> <!-- end row -->
+
+      <div class="results-container area ">
+          <% if (associations.length > 0) { %>
+          <% if( typeof url !== 'undefined' ) { %>
+              <div class="share-links">
+                <a class="share-link share-link-twitter" title="Share via Twitter" href="<%=shareTwitter()%>">Twitter</a>
+                <a class="share-link share-link-facebook" title="Share via Facebook" href="<%=shareFacebook()%>">Facebook</a>
+                <a class="share-link share-link-googleplus" title="Share via Google Plus" href="<%=shareGooglePlus()%>">Google Plus</a>
+                <a class="share-link share-link-stumbleupon" title="Share via Stumbleupon" href="<%=shareStumbleupon()%>">Stumbleupon</a>
+              </div>
+            <% } %>
+            <div class="result-group-container">
+            </div>
+        <% }  else { %>
+          <div class="result-group-container">
+          <div class="alert alert-info lead">No churn found</div>
+          </div>
+        <% } %>
+          <a class="btn btn-default btn-md" href="/" ><span class="glyphicon glyphicon-arrow-left"></span> Perform another search</a>
+      </div>
   </script>
   <script id="nullResultsTemplate" type="text/html">
   </script>
