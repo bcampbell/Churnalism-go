@@ -1,0 +1,33 @@
+{{set . "Title" "Extensions"}}
+{{set . "Description" "What is Churnalism.com? Churnalism.com is an independent, non-profit website to help the public distinguish between original journalism and 'churnalism'."}}
+{{template "header.html" .}}
+<div class="area area-textblock">
+    <h2>The browser extension</h2>
+    <p>Once installed, the extension sits in the background as you browse the web -
+    you shouldn't even notice it's there.</p>
+    <p>When you read a news article, the extension activates and checks it
+    against the churnalism.com database of press releases.</p>
+    <p>
+    <strong>Install it now:</strong> <a class="btn btn-primary " href="https://chrome.google.com/extensions/detail/ajpipnllmkighdipoilegaedgehdbapm">Add to Chrome</a>
+    <a class="btn btn-primary " href="/public/churnalism-uk-0.11.xpi">Add to Firefox</a>
+    </p>
+    <div>
+        <h3>It tells you if churnalism is detected</h3>
+        <img src="/public/images/extension/warningbar.png" class="img-screenshot" />
+    </div>
+    <div>
+        <h3>It tells you where the churn came from</h3>
+        <a href="/public/images/extension/popup.png">
+            <img width="300" src="/public/images/extension/popup.png" />
+        </a>
+    </div>
+    <div>
+        <h3>It'll show you the churned text</h3>
+        <p>The highlighter icon <img src="/public/images/extension/highlighter.png" />
+        toggles highlighting of cut&amp;pasted text:</p>
+        <a href="/public/images/extension/screenshot-chrome.png"/>
+        <img width="400" src="/public/images/extension/screenshot-chrome.png" class="img-screenshot" />
+        </a>
+   </div>
+</div>
+{{template "footer.html" .}}

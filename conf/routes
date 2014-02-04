@@ -15,6 +15,7 @@ POST    /search									App.Search
 #POST	/document								App.Document
 #POST	/association/:doctype/:docid			App.Association
 #POST	/suggest								App.Suggest
+GET     /extension								App.Extension
 GET     /faq									App.Faq
 GET     /contact								App.Contact
 #GET     /examples								App.Examples
